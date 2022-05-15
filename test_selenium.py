@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 option = Options()
 option.add_argument('--headless')
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=option)
 driver.get('https://www.google.co.jp/')
 
 # 検索フィールドの取得
