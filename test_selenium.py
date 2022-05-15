@@ -10,7 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 option = Options()
 option.add_argument('--headless')
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=option)
 driver.get('https://www.google.co.jp/')
 
 # 検索フィールドの取得
@@ -30,7 +30,7 @@ button.click()
 time.sleep(3)
 
 # 最初のリンクを取得
-link_tags = driver.find_elements_by_tag_name('a')
+link_tags = driver.find_elements(by=By.TAG_NAME, value='a')
 actions = ActionChains(driver)
 actions.move_to_element(link_tags[8]).click().perform()
 
