@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
 import time
 from selenium.webdriver.common.by import By
-from openpyxl import Workbook
+
 
 option = Options()
 option.add_argument('--headless')
@@ -28,9 +28,14 @@ button.click()
 #3秒待つ
 time.sleep(3)
 
+#指定したURLに遷移
+a = driver.get("https://my-best.com")
 
 #3秒待つ
 time.sleep(3)
+
+print(a.count('python'))
+
 
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
@@ -38,12 +43,3 @@ soup = BeautifulSoup(html, 'html.parser')
 ll = [x for x in soup.text.split(' ') if len(x) > 0]
 for elem in ll:
     print(elem)
-
-# 取得したリンクの一覧をExcelに出力する
-wb = Workbook()
-ws = wb.active
-
-for index, a in enumerate(soup.find_all('a')):
-    ws.cell(row=index + 1, column=1).value = a.get('href')
-
-wb.save("answer.xlsx")
