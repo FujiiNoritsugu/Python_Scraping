@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
 import time
 from selenium.webdriver.common.by import By
+from openpyxl Workbook
 
 
 option = Options()
@@ -31,10 +32,16 @@ time.sleep(3)
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
+wb = Workbook()
+
+ws = wb.active
+
 ll = [x for x in soup.text.split(' ') if len(x) > 0]
 i = 1
 for elem in ll:
+    ws["A" + i] = elem
     print(i)
     print(elem)
     i+=1
+wb.save('result.xlsx')
 
