@@ -4,7 +4,13 @@ from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
 import time
 from selenium.webdriver.common.by import By
+from openpyxl import Workbook
 
+# 新規のExcelブックを作成
+workbook = Workbook()
+
+# アクティブなシートを取得
+sheet = workbook.active
 
 option = Options()
 option.add_argument('--headless')
@@ -32,9 +38,11 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
 ll = [x for x in soup.text.split(' ') if len(x) > 0]
-i = 1
-for elem in ll:
-    print(elem)
-    print(i + "回")
-    i = i + 1
+
+# 1行ずつ文字を入力し、改行する
+for text in li:
+    sheet.append([text])
+
+# Excelファイルを保存
+workbook.save("output.xlsx")
     
